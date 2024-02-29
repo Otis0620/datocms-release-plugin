@@ -1,0 +1,40 @@
+{
+  "eslintConfig": {
+    "extends": ["react-app", "shared-config"],
+    "rules": {
+      "additional-rule": "warn",
+      "import/order": [
+        "error",
+        {
+          "pathGroups": [
+            {
+              "pattern": "~*/**",
+              "group": "external",
+              "position": "after"
+            }
+          ],
+          "groups": [
+            ["builtin", "external"],
+            ["internal", "parent", "sibling", "index"]
+          ],
+          "newlines-between": "always"
+        }
+      ],
+      "sort-imports": [
+        "error",
+        {
+          "ignoreDeclarationSort": true
+        }
+      ]
+    },
+    "overrides": [
+      {
+        "files": ["**/*.ts?(x)"],
+        "rules": {
+          "additional-typescript-only-rule": "warn"
+        }
+      }
+    ]
+  }
+}
+
