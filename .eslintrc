@@ -1,40 +1,48 @@
 {
-  "eslintConfig": {
-    "extends": ["react-app", "shared-config"],
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint",
+        "react",
+        "import"
+    ],
     "rules": {
-      "additional-rule": "warn",
-      "import/order": [
-        "error",
-        {
-          "pathGroups": [
+        "react/react-in-jsx-scope": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "import/order": [
+            "error",
             {
-              "pattern": "~*/**",
-              "group": "external",
-              "position": "after"
+              "pathGroups": [
+                {
+                  "pattern": "~*/**",
+                  "group": "external",
+                  "position": "after"
+                }
+              ],
+              "groups": [
+                ["builtin", "external"],
+                ["internal", "parent", "sibling", "index"]
+              ],
+              "newlines-between": "always"
             }
           ],
-          "groups": [
-            ["builtin", "external"],
-            ["internal", "parent", "sibling", "index"]
-          ],
-          "newlines-between": "always"
-        }
-      ],
-      "sort-imports": [
-        "error",
-        {
-          "ignoreDeclarationSort": true
-        }
-      ]
-    },
-    "overrides": [
-      {
-        "files": ["**/*.ts?(x)"],
-        "rules": {
-          "additional-typescript-only-rule": "warn"
-        }
-      }
-    ]
-  }
+          "sort-imports": [
+            "error",
+            {
+              "ignoreDeclarationSort": true
+            }
+          ]
+    }
 }
-
