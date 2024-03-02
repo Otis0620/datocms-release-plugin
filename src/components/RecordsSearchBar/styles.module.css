@@ -1,0 +1,10 @@
+.formContainer {
+    display: flex;
+    margin-top: 3rem;
+    justify-content: center;
+}
+
+.searchInputContainer {
+    width: 80%;
+    margin: 0 2rem 0 2rem;
+}

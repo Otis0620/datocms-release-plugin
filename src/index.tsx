@@ -8,7 +8,7 @@ import {
 import { render } from './utils/render';
 import ConfigScreen from './entrypoints/ConfigScreen';
 import 'datocms-react-ui/styles.css';
-import Release from './entrypoints/Pages/Release';
+import Release from './entrypoints/pages/Release';
 
 enum PageId {
   Release = 'release',
