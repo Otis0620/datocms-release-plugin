@@ -10,20 +10,22 @@ type Props = {
   ctx: RenderPageCtx;
 };
 
-const recordService = new RecordService();
-
 const RecordsSearchBar = ({ ctx }: Props) => {
   const [recordName, setRecordName] = useState<string>('');
   const { setRecords } = useContext(RecordContext);
+  const recordService = new RecordService(
+    ctx.currentUserAccessToken!,
+  );
 
   async function handleSearchRecords() {
-    const records = await recordService.searchRecords(
-      recordName,
-      ctx.currentUserAccessToken!,
-    );
+    try {
+      const records = await recordService.searchRecords(recordName);
 
-    setRecords(records);
-    setRecordName('');
+      setRecords(records);
+      setRecordName('');
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const handleOnChange = (recordName: string) => {
