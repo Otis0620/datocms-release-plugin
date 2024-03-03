@@ -4,6 +4,7 @@ import { Canvas } from 'datocms-react-ui';
 
 import { Record } from '../../models/record';
 import { RecordContext } from '../../contexts/RecordContext';
+import styles from './styles.module.css';
 
 type Props = {
   ctx: RenderPageCtx;
@@ -11,25 +12,24 @@ type Props = {
 
 const Records = ({ ctx }: Props) => {
   const { records } = useContext(RecordContext);
+  const isRecordsEmpty = records.length === 0;
 
   return (
     <Canvas ctx={ctx}>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Author</th>
-          </tr>
-        </thead>
-        <tbody>
-          {records.map((record: Record) => (
-            <tr key={record.id}>
-              <td>{record.title}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {!isRecordsEmpty ? (
+        <>
+          <div className={styles.header}>
+            <h3>Record Name</h3>
+          </div>
+          <div className={styles.tableContainer}>
+            {records.map((record: Record) => (
+              <div key={record.id} className={styles.row}>
+                <div className={styles.column}>{record.title}</div>
+              </div>
+            ))}
+          </div>
+        </>
+      ) : null}
     </Canvas>
   );
 };
