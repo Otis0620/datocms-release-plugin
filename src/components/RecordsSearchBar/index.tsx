@@ -12,12 +12,19 @@ type Props = {
 
 const RecordsSearchBar = ({ ctx }: Props) => {
   const [recordName, setRecordName] = useState<string>('');
-  const { setRecords } = useContext(RecordContext);
+  const { records, setRecords } = useContext(RecordContext);
+
+  const isRecordsEmpty = records.length === 0;
+
   const recordService = new RecordService(
     ctx.currentUserAccessToken!,
   );
 
   async function handleSearchRecords() {
+    if (!isRecordsEmpty) {
+      return;
+    }
+
     try {
       const records = await recordService.searchRecords(recordName);
 

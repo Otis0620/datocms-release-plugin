@@ -45,6 +45,16 @@ class RecordService {
     return this.mapRecords(records);
   }
 
+  async getStoredRecords(): Promise<Record[]> {
+    const records = await this.client.items.list({
+      filter: {
+        type: this.apiKey,
+      },
+    });
+
+    return JSON.parse(records[0].record as string);
+  }
+
   async createRecordModel(): Promise<SimpleSchemaTypes.ItemType> {
     const model = await this.client.itemTypes.create({
       name: this.modelName,
