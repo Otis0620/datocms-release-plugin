@@ -31,7 +31,7 @@ const RecordsSearchBar = ({ ctx }: Props) => {
   }
 
   function handleBulkPublish() {
-    recordService.hanldeBulkPublish(records);
+    recordService.bulkPublish(records);
 
     setRecords([]);
     setRecordName('');

@@ -43,7 +43,7 @@ class RecordService {
     return records;
   }
 
-  async hanldeBulkPublish(records: Record[]): Promise<void> {
+  async bulkPublish(records: Record[]): Promise<void> {
     const storedRecords = await this.getStoredRecords();
 
     await this.bulkPublishRecords(records);
@@ -80,7 +80,7 @@ class RecordService {
         only_valid: true,
       });
 
-      return this.mapRecords(records);
+      return this.mapUnpublishedRecords(records);
     } catch (error) {
       return [] as Record[];
     }
@@ -158,7 +158,7 @@ class RecordService {
     }
   }
 
-  mapRecords(
+  mapUnpublishedRecords(
     records: SimpleSchemaTypes.ItemInstancesTargetSchema,
   ): Record[] {
     return records
