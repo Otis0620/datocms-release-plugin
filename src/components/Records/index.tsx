@@ -21,11 +21,11 @@ const Records = ({ ctx }: Props) => {
   useEffect(() => {
     async function getStoredRecords() {
       try {
-        const records = await recordService.getStoredRecords();
+        const { records } = await recordService.getStoredRecords();
 
         setRecords(records);
       } catch (error) {
-        console.error('no records found');
+        // console.error('no records found');
       }
     }
 
