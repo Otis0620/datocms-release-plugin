@@ -1,3 +1,3 @@
-# [Your plugin name]
+# Release Plugin
 
-[Describe what your plugin does, and how users you can configure it! Screenshots are always welcome!]
+This Plugin enables bulk publishing of selected records.
