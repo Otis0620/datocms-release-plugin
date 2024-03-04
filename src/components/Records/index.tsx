@@ -12,8 +12,11 @@ type Props = {
 };
 
 const Records = ({ ctx }: Props) => {
-  const { records, setRecords } = useContext(RecordContext);
+  const { records, setRecords, recordError, publishError } =
+    useContext(RecordContext);
+
   const isRecordsEmpty = records.length === 0;
+
   const recordService = new RecordService(
     ctx.currentUserAccessToken!,
   );
@@ -25,7 +28,7 @@ const Records = ({ ctx }: Props) => {
 
         setRecords(records);
       } catch (error) {
-        // console.error('no records found');
+        return;
       }
     }
 
@@ -47,7 +50,16 @@ const Records = ({ ctx }: Props) => {
             ))}
           </div>
         </>
-      ) : null}
+      ) : (
+        <div className={styles.emptyRecordsContainer}>
+          <h1 className={styles.emptyRecordsText}>Empty Records</h1>
+          <p className={styles.emptyRecordsDescription}>
+            {recordError || publishError
+              ? 'No records found or record may not be unpublished'
+              : 'Please Search For A Record'}
+          </p>
+        </div>
+      )}
     </Canvas>
   );
 };
