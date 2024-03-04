@@ -56,7 +56,7 @@ const Records = ({ ctx }: Props) => {
           <p className={styles.emptyRecordsDescription}>
             {recordError || publishError
               ? 'No records found or record may not be unpublished'
-              : 'Please Search For A Record'}
+              : 'Please search for an unpublished record'}
           </p>
         </div>
       )}
