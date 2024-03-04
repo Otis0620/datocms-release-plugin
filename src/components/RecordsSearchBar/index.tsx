@@ -12,7 +12,7 @@ type Props = {
 
 const RecordsSearchBar = ({ ctx }: Props) => {
   const [recordName, setRecordName] = useState<string>('');
-  const { setRecords } = useContext(RecordContext);
+  const { records, setRecords } = useContext(RecordContext);
 
   const recordService = new RecordService(
     ctx.currentUserAccessToken!,
@@ -28,6 +28,13 @@ const RecordsSearchBar = ({ ctx }: Props) => {
       setRecords([]);
       setRecordName('');
     }
+  }
+
+  function handleBulkPublish() {
+    recordService.hanldeBulkPublish(records);
+
+    setRecords([]);
+    setRecordName('');
   }
 
   const handleOnChange = (recordName: string) => {
@@ -50,13 +57,24 @@ const RecordsSearchBar = ({ ctx }: Props) => {
             onChange={handleOnChange}
           />
         </div>
+
         <div>
           <Button
-            buttonType="primary"
+            buttonType="muted"
             onClick={handleSearchRecords}
             disabled={!recordName.length}
           >
             Search
+          </Button>
+        </div>
+
+        <div className={styles.publishButtonContainer}>
+          <Button
+            buttonType="primary"
+            onClick={handleBulkPublish}
+            disabled={records.length === 0}
+          >
+            Publish
           </Button>
         </div>
       </div>

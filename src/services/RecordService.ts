@@ -5,6 +5,7 @@ import {
 } from '@datocms/cma-client-browser';
 
 import { Record } from '../models/record';
+import { RecordStatus } from '../components/enums/RecordStatus';
 
 class RecordService {
   private client: Client;
@@ -42,6 +43,13 @@ class RecordService {
     return records;
   }
 
+  async hanldeBulkPublish(records: Record[]): Promise<void> {
+    const storedRecords = await this.getStoredRecords();
+
+    await this.bulkPublishRecords(records);
+    await this.destroyRecord(storedRecords.recordId);
+  }
+
   async destroyRecord(recordId: string): Promise<void> {
     try {
       await this.client.items.destroy(recordId);
@@ -68,6 +76,8 @@ class RecordService {
         },
         locale: 'en',
         order_by: '_rank_DESC',
+        version: 'unpublished',
+        only_valid: true,
       });
 
       return this.mapRecords(records);
@@ -122,7 +132,7 @@ class RecordService {
     }
   }
 
-  async createRecord(records: Record[]) {
+  async createRecord(records: Record[]): Promise<void> {
     try {
       await this.client.items.create({
         item_type: { type: 'item_type', id: this.modelId },
@@ -133,15 +143,37 @@ class RecordService {
     }
   }
 
+  async bulkPublishRecords(records: Record[]): Promise<void> {
+    try {
+      const itemsToPublish = records.map((record) => ({
+        type: 'item',
+        id: record.id,
+      })) as SimpleSchemaTypes.ItemInstancesTargetSchema;
+
+      await this.client.items.bulkPublish({
+        items: itemsToPublish,
+      });
+    } catch (error) {
+      return;
+    }
+  }
+
   mapRecords(
     records: SimpleSchemaTypes.ItemInstancesTargetSchema,
   ): Record[] {
-    return records.map((record) => {
-      return {
-        id: record.id,
-        title: record.title,
-      };
-    }) as Record[];
+    return records
+      .filter(({ id, title, meta: { status } }) => {
+        if (status === RecordStatus.DRAFT) {
+          return {
+            id,
+            title,
+          };
+        }
+      })
+      .map(({ id, title }) => ({
+        id,
+        title,
+      })) as Record[];
   }
 }
 
