@@ -1,0 +1,17 @@
+.row {
+  display: flex;
+  flex: 1;
+  border-bottom: 1px solid #f0f0f0;
+  text-decoration: none;
+  min-width: 0;
+  background: white;
+}
+
+.column {
+  display: flex;
+  padding: 10px 0 10px 20px;
+  align-items: center;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-size: .9em;
+}

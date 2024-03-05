@@ -24,11 +24,12 @@ class RecordService {
     const records = await this.listRecords(query);
     const storedRecords = await this.getStoredRecords();
     const existingModel = await this.findExistingModel();
-    const isModelEmpty = Object.keys(existingModel).length === 0;
+
+    const modelExists = Object.keys(existingModel).length === 0;
 
     await this.destroyRecord(storedRecords.recordId);
 
-    if (isModelEmpty) {
+    if (!modelExists) {
       const model = await this.createRecordModel();
 
       this.modelId = model.id;

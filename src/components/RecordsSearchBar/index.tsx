@@ -13,6 +13,7 @@ type Props = {
 
 const RecordsSearchBar = ({ ctx }: Props) => {
   const [recordName, setRecordName] = useState<string>('');
+
   const { records, setRecords, setRecordError } =
     useContext(RecordContext);
 
@@ -23,7 +24,9 @@ const RecordsSearchBar = ({ ctx }: Props) => {
   async function handleSearchRecords() {
     const records = await recordService.searchRecords(recordName);
 
-    if (records.length !== 0) {
+    const isRecords = records.length !== 0;
+
+    if (isRecords) {
       setRecords(records);
       setRecordName('');
     } else {

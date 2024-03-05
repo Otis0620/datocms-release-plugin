@@ -6,6 +6,8 @@ import { Record } from '../../models/record';
 import { RecordContext } from '../../contexts/RecordContext';
 import styles from './styles.module.css';
 import RecordService from '../../services/RecordService';
+import BlankSlate from '../BlankSlate/BlankSlate';
+import RecordItem from '../RecordItem/RecordItem';
 
 type Props = {
   ctx: RenderPageCtx;
@@ -42,23 +44,21 @@ const Records = ({ ctx }: Props) => {
           <div className={styles.header}>
             <h3>Record Name</h3>
           </div>
+
           <div className={styles.tableContainer}>
-            {records.map((record: Record) => (
-              <div key={record.id} className={styles.row}>
-                <div className={styles.column}>{record.title}</div>
-              </div>
+            {records.map(({ title, id }: Record) => (
+              <RecordItem key={id} title={title} />
             ))}
           </div>
         </>
       ) : (
-        <div className={styles.emptyRecordsContainer}>
-          <h1 className={styles.emptyRecordsText}>Empty Records</h1>
-          <p className={styles.emptyRecordsDescription}>
-            {recordError || publishError
+        <BlankSlate
+          description={
+            recordError || publishError
               ? 'No records found or record may not be unpublished'
-              : 'Please search for an unpublished record'}
-          </p>
-        </div>
+              : 'Please search for an unpublished record'
+          }
+        />
       )}
     </Canvas>
   );

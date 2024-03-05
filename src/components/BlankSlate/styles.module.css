@@ -1,0 +1,20 @@
+.blankSlateContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0 2px 5px #0000001a;
+  background-color: #fff;
+  border-radius: 4px;
+  margin: 3rem 4rem 0 4rem;
+  height: 20rem;
+}
+
+.blankSlateTitle {
+  text-align: center;
+}
+
+.blankSlateDescription {
+  text-align: center;
+}
+  

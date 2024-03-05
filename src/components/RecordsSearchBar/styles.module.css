@@ -1,14 +1,14 @@
 .formContainer {
-    display: flex;
-    margin-top: 3rem;
-    justify-content: center;
+  display: flex;
+  margin-top: 3rem;
+  justify-content: center;
 }
 
 .searchInputContainer {
-    min-width: 40%;
-    margin: 0 2rem 0 2rem;
+  min-width: 40%;
+  margin: 0 2rem 0 2rem;
 }
 
 .publishButtonContainer {
-    margin-left: 2rem
+  margin-left: 2rem
 }
