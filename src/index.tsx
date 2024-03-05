@@ -1,5 +1,4 @@
 import {
-  IntentCtx,
   RenderConfigScreenCtx,
   RenderPageCtx,
   connect,
@@ -26,7 +25,7 @@ connect({
     }
   },
 
-  mainNavigationTabs(ctx: IntentCtx) {
+  mainNavigationTabs() {
     return [
       {
         label: 'Release',

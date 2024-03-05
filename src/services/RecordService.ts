@@ -5,7 +5,7 @@ import {
 } from '@datocms/cma-client-browser';
 
 import { Record } from '../models/record';
-import { RecordStatus } from '../components/enums/RecordStatus';
+import { RecordStatus } from '../enums/RecordStatus';
 
 class RecordService {
   private client: Client;
