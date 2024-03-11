@@ -49,10 +49,7 @@ const RecordsSearchBar = ({ ctx }: Props) => {
 
   return (
     <Canvas ctx={ctx}>
-      <div
-        onSubmit={() => console.log('onSubmit')}
-        className={styles.formContainer}
-      >
+      <div className={styles.formContainer}>
         <div className={styles.searchInputContainer}>
           <TextInput
             required
